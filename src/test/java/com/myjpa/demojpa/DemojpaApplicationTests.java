@@ -10,4 +10,6 @@ class DemojpaApplicationTests {
 	void contextLoads() {
 	}
 
+
+
 }

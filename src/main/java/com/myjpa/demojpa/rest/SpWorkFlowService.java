@@ -1,9 +1,11 @@
 package com.myjpa.demojpa.rest;
 
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.concurrent.Future;
 
 @Service
 public class SpWorkFlowService {
@@ -13,8 +15,15 @@ public class SpWorkFlowService {
         //initcontext
     }
 
+    @Async
     public String processBankFile(String bankccode) {
-        //thread for work flow---> 1,2,3
-        return "success";
+        //no need to manage thread - thread for work flow---> 1,2,3
+        System.out.println("success "+ bankccode + " " + Thread.currentThread().getName());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "success"+ bankccode;
     }
 }

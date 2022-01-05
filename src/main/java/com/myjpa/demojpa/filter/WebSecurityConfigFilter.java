@@ -3,23 +3,21 @@ package com.myjpa.demojpa.filter;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @EnableWebFluxSecurity
 public class WebSecurityConfigFilter  {
 
-    @Value("${spha.username}")
+    @Value("${spmultitenant.username}")
     private String username;
-    @Value("${spha.passwd}")
+    @Value("${spmultitenant.passwd}")
     private String passwd;
 
     @Bean
@@ -41,8 +39,7 @@ public class WebSecurityConfigFilter  {
             )
             .httpBasic(withDefaults())
             .formLogin(withDefaults())
-             //.csrf(csrf -> csrf.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()));
-                .csrf(csrf -> csrf.disable());
+            .csrf(csrf -> csrf.disable());
         return http.build();
     }
 
